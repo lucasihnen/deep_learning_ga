@@ -9,9 +9,13 @@ from langchain.schema.messages import SystemMessage
 from utils import image_to_data_url
 
 # Load the trained model
-MODEL_PATH = "../model/tomato&potato_disease_classifier.h5"
-model = tf.keras.models.load_model(MODEL_PATH)
+@st.cache_resource
+def load_model():
+    MODEL_PATH = "../model/tomato&potato_disease_classifier_v2_ft.h5"
+    model = tf.keras.models.load_model(MODEL_PATH)
+    return model
 
+model = load_model()
 # Set class names (should match training)
 class_names = ['Potato___Early_blight', 'Potato___Late_blight', 'Potato___healthy',
                'Tomato_Bacterial_spot', 'Tomato_Early_blight', 'Tomato_Late_blight',
@@ -23,13 +27,14 @@ class_names = ['Potato___Early_blight', 'Potato___Late_blight', 'Potato___health
 # Preprocessing function
 def preprocess_image(image):
     image = image.resize((224, 224))
-    image = np.array(image) / 255.0
+    #image = np.array(image) / 255.0
+    image = np.array(image)
     image = np.expand_dims(image, axis=0)
     return image
 
 # Gemini setup
 os.environ['GOOGLE_API_KEY'] = 'AIzaSyDjv5kiOA45O25NPxjp9B60CcOLjBSS5vY'
-chat = ChatGoogleGenerativeAI(model='gemini-1.5-flash', temperature=0.9)
+chat = ChatGoogleGenerativeAI(model='gemini-2.5-flash', temperature=0.9)
 
 # Page setup
 st.header("CropBot: Your Crop Health Assistant!")
@@ -52,7 +57,16 @@ if uploaded_image is not None:
             gemini_prompt = [
                 SystemMessage(content="You are a helpful AI assistant that analyzes images and an expert on crops."),
                 HumanMessage(content=[
-                    {"type": "text", "text": "Analyze what is the most probable crop from the image, based solely on its leaf and state if it's healthy or not. Be brief."},
+                    {"type": "text", "text": """
+                            You are a botanical expert, able to recognize crops from their leaves. The crop possibilities are three: potato, tomato or pepper bell. After determining which crop it is, you need to be able to classify it within different states available for each crop.
+                            For Pepper Bell, the possible labels are: ['Pepper__bell___Bacterial_spot', 'Pepper__bell___healthy'],
+                            For Potato, the label possibilities are: ['Potato___Early_blight', 'Potato___Late_blight', 'Potato___healthy']
+                            For Tomato, the labels are: ['Tomato_Bacterial_spot', 'Tomato_Early_blight', 'Tomato_Late_blight', 'Tomato_Leaf_Mold', 'Tomato_Septoria_leaf_spot', 'Tomato_Spider_mites_Two_spotted_spider_mite', 'Tomato__Target_Spot', 'Tomato__Tomato_YellowLeaf__Curl_Virus', 'Tomato__Tomato_mosaic_virus', 'Tomato_healthy']
+                            If you are not able to classify between these three, you have to return None.
+
+                            **Important Note** The output must be the single word, most likely to be final label of the plant.
+                        """
+                     },
                     {"type": "image_url", "image_url": {"url": image_data_url}}
                 ])
             ]
