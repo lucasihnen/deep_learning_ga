@@ -6,7 +6,7 @@ import tensorflow as tf
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.schema import HumanMessage
 from langchain.schema.messages import SystemMessage
-from utils import image_to_data_url
+from utils import image_to_data_url, preprocess_image
 
 # Load the trained model
 @st.cache_resource
@@ -23,14 +23,6 @@ class_names = ['Potato___Early_blight', 'Potato___Late_blight', 'Potato___health
                'Tomato_Spider_mites_Two_spotted_spider_mite', 'Tomato__Target_Spot',
                'Tomato__Tomato_YellowLeaf__Curl_Virus', 'Tomato__Tomato_mosaic_virus',
                'Tomato_healthy']
-
-# Preprocessing function
-def preprocess_image(image):
-    image = image.resize((224, 224))
-    #image = np.array(image) / 255.0
-    image = np.array(image)
-    image = np.expand_dims(image, axis=0)
-    return image
 
 # Gemini setup
 os.environ['GOOGLE_API_KEY'] = 'AIzaSyDjv5kiOA45O25NPxjp9B60CcOLjBSS5vY'
