@@ -1,0 +1,7 @@
+streamlit
+tensorflow
+Pillow
+numpy
+fpdf
+langchain
+langchain-google-genai
