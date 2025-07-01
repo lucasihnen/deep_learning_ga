@@ -1,2 +1,5 @@
+[global]
+developmentMode = false
+
 [python]
 version = "3.10"
