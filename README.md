@@ -9,7 +9,7 @@ Traditional crop insurance claims are slow, manual, and often inaccurate. ClaimL
 
 The slidedeck presentation can be seen [here](deep_learning_final_project_slidedeck.pdf), within the repository
 
-The Streamlit App URL where the model is deployed can be seen [here](www.streamlit.io)
+The Streamlit App URL where the model is deployed can be seen [here](https://claimleaf-plant-disease-claims-yoh5jcrzwzci8sznr4bz9n.streamlit.app/)
 
 ---
 
