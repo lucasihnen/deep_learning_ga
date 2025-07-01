@@ -15,7 +15,7 @@ IMAGE_FOLDER = "resources/images"
 # Load the trained model
 @st.cache_resource
 def load_model():
-    MODEL_PATH = "../model/tomato&potato_disease_classifier_v2_ft.h5"
+    MODEL_PATH = "model/tomato&potato_disease_classifier_v2_ft.h5"
     model = tf.keras.models.load_model(MODEL_PATH)
     return model
 
