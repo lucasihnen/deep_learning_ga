@@ -1,14 +1,78 @@
-# Deep Learning – Group Assignment
+# ClaimLeaf 🌿  
+**Your AI-Powered Crop Claim Companion**
 
-This repository contains the main deliverable for the Deep Learning group project at IE University's Master in Business Analytics and Big Data.
+ClaimLeaf is a lightweight, intelligent assistant that detects crop leaf diseases from images and instantly generates insurance-ready reports—streamlining claims for farmers, insurers, and agri-cooperatives.
 
-## Group Members  
-_Lucas Ihnen | Omar Harradi | Taddeo Carpinelli | Tomas Silva | Massimo Tassinari_
+## 🧠 Project Overview
 
-## Problem Statement  
-Early-stage plant diseases significantly impact agricultural productivity, especially in crops like tomatoes, potatoes, and bell peppers. Detecting these diseases early can prevent major losses.
+Traditional crop insurance claims are slow, manual, and often inaccurate. ClaimLeaf addresses this by automating disease detection and claim reporting using deep learning and transfer learning.
 
-## Our Solution  
-Using transfer learning and fine-tuning on a pre-trained image classification model, we developed a deep learning solution to automatically detect and classify diseases in crop leaves from images.
+---
 
-This enables early detection and proper treatment of diseases! 
+## 🚀 Features
+
+- 📷 Leaf disease detection via image upload  
+- 📄 Instant PDF claim generation (offline-ready)  
+- 🌐 Web/mobile interface with offline support  
+- 🤖 ~93% classification accuracy, <1s inference  
+
+---
+
+## 🧱 Tech Stack
+
+| Component        | Tool                             |
+|------------------|----------------------------------|
+| **Model**        | MobileNetV2 (pre-trained, fine-tuned) |
+| **Data**         | PlantVillage (20K labeled images)|
+| **UI**           | Streamlit + Image Picker         |
+| **Report Generator** | FPDF (PDF output)            |
+| **Helper**       | Gemini 2.5 fallback (<70% conf)  |
+
+---
+
+## 🔧 Model Training
+
+Two-phase transfer learning:
+
+1. **Feature Extraction** (Frozen base):  
+   - LR: 0.001 | Epochs: 10 | Accuracy: 91%
+2. **Fine-Tuning** (Unfrozen base):  
+   - LR: 0.00001 | Epochs: 5 | Accuracy: 93%
+
+- Input shape: `224x224 RGB`  
+- Augmentation applied to reduce overfitting.
+
+---
+
+## 🧪 How It Works
+
+1. Take or upload a leaf image  
+2. AI model classifies disease (or detects healthy)  
+3. Download a PDF report ready for insurance submission  
+
+---
+
+## 💼 Business Impact
+
+| Stakeholder   | Impact                            |
+|---------------|-----------------------------------|
+| **Farmers**   | Faster payouts, no paperwork      |
+| **Insurers**  | Lower fraud, reduced costs        |
+| **NGOs/Govs** | Real-time disaster response       |
+
+---
+
+## 🛣️ Roadmap
+
+- Expand to more crops (e.g., maize, wheat)  
+- Integrate GPS and field data caching  
+- Launch pilot with insurers/co-ops  
+- Explore monetization (freemium/API/SaaS)
+
+---
+
+## 👨‍👩‍👧‍👦 Team
+
+Lucas Ihnen · Massimo Tassinari · Omar Harradi  
+Taddeo Carpinelli · Tomás Silva  
+Prof. Concepción Díaz (Instructor)  
