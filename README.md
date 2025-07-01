@@ -1,11 +1,15 @@
 # ClaimLeaf 🌿  
 **Your AI-Powered Crop Claim Companion**
 
-ClaimLeaf is a lightweight, intelligent assistant that detects crop leaf diseases from images and instantly generates insurance-ready reports—streamlining claims for farmers, insurers, and agri-cooperatives.
+ClaimLeaf is a lightweight, intelligent assistant that detects crop leaf diseases from images and instantly generates insurance-ready reports, streamlining claims for farmers, insurers, and agri-cooperatives.
 
 ## 🧠 Project Overview
 
 Traditional crop insurance claims are slow, manual, and often inaccurate. ClaimLeaf addresses this by automating disease detection and claim reporting using deep learning and transfer learning.
+
+The slidedeck presentation can be seen [here](deep_learning_final_project_slidedeck.pdf), within the repository
+
+The Streamlit App URL where the model is deployed can be seen [here](www.streamlit.io)
 
 ---
 
