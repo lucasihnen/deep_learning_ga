@@ -3,13 +3,10 @@ import os
 import numpy as np
 from PIL import Image
 import tensorflow as tf
-import base64
-from io import BytesIO
-from fpdf import FPDF
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.schema import HumanMessage
 from langchain.schema.messages import SystemMessage
-from utils import image_to_data_url, preprocess_image
+from utils import image_to_data_url, preprocess_image, generate_claim_pdf
 
 # Config
 CONFIDENCE_THRESHOLD = 70.0
@@ -36,37 +33,11 @@ class_names = ['Potato___Early_blight', 'Potato___Late_blight', 'Potato___health
 os.environ['GOOGLE_API_KEY'] = 'AIzaSyDjv5kiOA45O25NPxjp9B60CcOLjBSS5vY'  
 chat = ChatGoogleGenerativeAI(model='gemini-2.5-flash', temperature=0.9)
 
-# PDF generation function
-def generate_claim_pdf(crop_type, diagnosis, confidence):
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_font("Arial", size=12)
-    pdf.set_title("Crop Insurance Claim Report")
-
-    pdf.cell(200, 10, txt="Crop Insurance Claim Report", ln=True, align='C')
-    pdf.ln(10)
-    pdf.multi_cell(0, 10, txt=(
-        f"Claimant: Farmer Name\n"
-        f"Crop Type: {crop_type}\n"
-        f"Detected Condition: {diagnosis}\n"
-        f"Model Confidence: {confidence:.2f}%\n"
-        f"\n"
-        f"Description:\n"
-        f"An AI-based leaf image diagnostic system has detected signs of crop disease.\n"
-        f"This report certifies the detection result for insurance claim submission.\n"
-        f"The condition identified is not classified as healthy and may require agronomic intervention."
-    ))
-
-    pdf_output = BytesIO()
-    pdf_bytes = pdf.output(dest='S').encode('latin-1')
-    pdf_output.write(pdf_bytes)
-    pdf_output.seek(0)
-    return pdf_output
-
 # Streamlit UI
-st.header("CropBot: Your Crop Health Assistant!")
+st.image("resources/logo/claimleaf_logo.png")
+st.header("Your AI-Powered Crop Claim Companion")
+st.markdown("An intelligent assistant that detects plant diseases from leaf images, generates instant insurance-ready reports, and streamlines claims for farmers, insurers, and agri-cooperatives")
 st.subheader("🌿 Is your crop sick?")
-st.markdown("Early signs of crop disease appear on leaves.\nBy detecting them in time, we can help farmers prevent huge losses.")
 
 # Image selection (gallery-style dropdown)
 image_files = [f for f in os.listdir(IMAGE_FOLDER) if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
