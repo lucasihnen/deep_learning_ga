@@ -7,9 +7,11 @@ ClaimLeaf is a lightweight, intelligent assistant that detects crop leaf disease
 
 Traditional crop insurance claims are slow, manual, and often inaccurate. ClaimLeaf addresses this by automating disease detection and claim reporting using deep learning and transfer learning.
 
-The slidedeck presentation can be seen [here](deep_learning_final_project_slidedeck.pdf), within the repository
+The dataset used is the **PlantVillage** dataset from kaggle, that can be seen [here](https://www.kaggle.com/datasets/emmarex/plantdisease)
 
-The Streamlit App URL where the model is deployed can be seen [here](https://claimleaf-plant-disease-claims-yoh5jcrzwzci8sznr4bz9n.streamlit.app/)
+The **slidedeck** presentation can be seen [here](deep_learning_final_project_slidedeck.pdf), within the repository
+
+The **Streamlit App** URL where the model is deployed can be seen [here](https://claimleaf-plant-disease-claims-yoh5jcrzwzci8sznr4bz9n.streamlit.app/)
 
 ---
 
