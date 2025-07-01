@@ -80,6 +80,7 @@ if selected_file:
 
             st.markdown(f"⚠️ **Model was uncertain (confidence < {CONFIDENCE_THRESHOLD:.0f}%)**")
             st.markdown(f"💬 **Gemini's Second Opinion:** {gemini_response.content}")
+            predicted_label = gemini_response.content
 
         if "healthy" not in predicted_label.lower():
             crop_type = predicted_label.split("_")[0]
